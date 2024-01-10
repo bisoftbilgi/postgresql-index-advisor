@@ -4,4 +4,7 @@
 # and then to feed them to postgresql_index_advice.sh
 #
 
-TODO
+# TODO: Show usage by default or with --help
+
+
+# TODO: Print different SQL statements (even if they are multi line)
