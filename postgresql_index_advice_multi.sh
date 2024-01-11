@@ -14,13 +14,14 @@
 # CURRENTLY: This expects a blank line at the end of the file
 
 INFILE="testinput.sql"
-LINE=''
+LINE=""
+SQLSTMT=""
 
 while read -r LINE
 do
-    echo -n "$LINE "
-    if printf '%s\n' "$LINE" | grep -q ";[ ]*$"
-    then
-        echo 
+    SQLSTMT+="${LINE} "
+    if printf '%s\n' "$LINE" | grep -q ";[ ]*$"; then
+        echo "$SQLSTMT"
+        SQLSTMT=""
     fi
 done < "$INFILE"
