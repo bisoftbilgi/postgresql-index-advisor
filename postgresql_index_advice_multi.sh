@@ -19,5 +19,8 @@ LINE=''
 while read -r LINE
 do
     echo -n "$LINE "
-    printf '%s\n' "$LINE" | grep -q ";[ ]*$" && echo 
+    if printf '%s\n' "$LINE" | grep -q ";[ ]*$"
+    then
+        echo 
+    fi
 done < "$INFILE"
