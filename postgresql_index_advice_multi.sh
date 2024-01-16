@@ -71,3 +71,5 @@ do
 done < "$INFILE"
 # Handle last line (if any)
 process_line
+
+# End 
