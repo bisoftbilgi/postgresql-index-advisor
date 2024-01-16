@@ -35,7 +35,6 @@ fi
 #
 # TODO: Call postgresql_index_advice.sh with single SQL statement on commandline
 #
-# CURRENTLY: This expects a blank line at the end of the file
 
 #INFILE="testinput.sql"
 LINE=""
