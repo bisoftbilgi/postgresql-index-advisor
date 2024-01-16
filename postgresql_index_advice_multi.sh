@@ -36,7 +36,9 @@ LINE=""
 SQLSTMT=""
 
 process_line () {
-    SQLSTMT+="${LINE} "
+    if [ -n "${LINE}" ]; then
+        SQLSTMT+="${LINE} "
+    fi
     if printf '%s\n' "$LINE" | grep -q ";[ ]*$"; then
         echo "$SQLSTMT"
         SQLSTMT=""
