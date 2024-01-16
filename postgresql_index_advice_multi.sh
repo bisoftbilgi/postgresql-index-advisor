@@ -36,20 +36,23 @@ fi
 # TODO: Call postgresql_index_advice.sh with single SQL statement on commandline
 #
 
-#INFILE="testinput.sql"
+# Initialise global variables
 LINE=""
 SQLSTMT=""
 
 # Function to process a single line of input from file
 process_line () {
     if [ -n "${LINE}" ]; then
+        # Add the new line read to the SQL statement being built
         SQLSTMT+="${LINE} "
     fi
+
+    # Check if we have end of SQL statement
     if printf '%s\n' "$LINE" | grep -q ";[ ]*$"; then
         echo "$SQLSTMT"
+        # Reset SQL statement as latest is concluded
         SQLSTMT=""
     fi
-
 }
 
 # Main loop
