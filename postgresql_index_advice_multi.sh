@@ -26,6 +26,12 @@ if [ "$#" -ne 3 ]; then
 fi
 
 
+# Port is first argument
+PORT=$1
+
+# DBname is second argument
+DBNAME=$2
+
 # Input file is the third argument
 INFILE=$3
 
@@ -43,6 +49,7 @@ fi
 # Initialise global variables
 LINE=""
 SQLSTMT=""
+PIA="./postgresql_index_advice.sh"
 
 # Function to process a single line of input from file
 process_line () {
@@ -54,6 +61,7 @@ process_line () {
     # Check if we have end of SQL statement
     if printf '%s\n' "$LINE" | grep -q ";[ ]*$"; then
         echo "$SQLSTMT"
+        $PIA $PORT $DBNAME \""${SQLSTMT}"\"
         # Reset SQL statement as latest is concluded
         SQLSTMT=""
     fi
