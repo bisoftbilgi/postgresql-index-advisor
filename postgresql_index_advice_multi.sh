@@ -35,11 +35,16 @@ INFILE=$1
 LINE=""
 SQLSTMT=""
 
-while read -r LINE
-do
+process_line () {
     SQLSTMT+="${LINE} "
     if printf '%s\n' "$LINE" | grep -q ";[ ]*$"; then
         echo "$SQLSTMT"
         SQLSTMT=""
     fi
+
+}
+while read -r LINE
+do
+    process_line
 done < "$INFILE"
+process_line
