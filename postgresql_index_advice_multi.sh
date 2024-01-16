@@ -69,6 +69,7 @@ while read -r LINE
 do
     process_line
 done < "$INFILE"
+
 # Handle last line (if any)
 process_line
 
