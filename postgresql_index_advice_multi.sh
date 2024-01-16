@@ -25,7 +25,6 @@ if [ "$#" -ne 3 ]; then
     exit 1
 fi
 
-
 # Port is first argument
 PORT=$1
 
@@ -42,10 +41,6 @@ if [ ! -f ${INFILE} ]; then
     exit 2
 fi
 
-#
-# TODO: Call postgresql_index_advice.sh with single SQL statement on commandline
-#
-
 # Initialise global variables
 LINE=""
 SQLSTMT=""
@@ -60,9 +55,11 @@ process_line () {
 
     # Check if we have end of SQL statement
     if printf '%s\n' "$LINE" | grep -q ";[ ]*$"; then
-        echo "$SQLSTMT"
+        echo
+        echo "Processing \"$SQLSTMT\""
+        # Execute postgresql_index_advice.sh
         $PIA $PORT $DBNAME \""${SQLSTMT}"\"
-        # Reset SQL statement as latest is concluded
+        # Reset SQL statement as latest is concluded by ;
         SQLSTMT=""
     fi
 }
