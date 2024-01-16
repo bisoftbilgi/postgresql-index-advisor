@@ -2,32 +2,36 @@
 #
 # Script to read a *.sql file with multiple (and multi-line) SQL statements
 # and then to feed them to postgresql_index_advice.sh
-#
+# 
+# USAGE: postgresql_index_advice_multi.sh <port> <database> <regular file with multiple SQL statements>
+# 
 
-#
-# TODO: Show usage by default or with --help or lack of argument
-#
 print_usage () {
-    echo "USAGE: $0 <regular file with multiple SQL statements>"
+    echo "   USAGE: $0 <port> <database> <regular file with multiple SQL statements>"
     echo
 }
 
-if [ "$#" -ne 1 ]; then
-    print_usage
-    exit 1
-fi
+echo
 
 if [ "$1" == "--help" ]; then
     print_usage
     exit 0
 fi
 
-# Input file is the first argument
-INFILE=$1
+if [ "$#" -ne 3 ]; then
+    echo "   ERROR: Invalid number of arguments"
+    echo
+    print_usage
+    exit 1
+fi
+
+
+# Input file is the third argument
+INFILE=$3
 
 # Check SQL file 
 if [ ! -f ${INFILE} ]; then
-    echo "ERROR: Missing or invalid input file"
+    echo "   ERROR: Missing or invalid input file '${INFILE}'"
     echo
     exit 2
 fi
