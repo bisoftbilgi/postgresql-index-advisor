@@ -8,7 +8,7 @@
 # TODO: Show usage by default or with --help or lack of argument
 #
 print_usage () {
-    echo "USAGE: $0 <filename with multiple SQL statements>"
+    echo "USAGE: $0 <regular file with multiple SQL statements>"
     echo
 }
 
@@ -25,8 +25,14 @@ fi
 # Input file is the first argument
 INFILE=$1
 
+# Check SQL file 
+if [ ! -f ${INFILE} ]; then
+    echo "ERROR: Missing or invalid input file"
+    echo
+    exit 2
+fi
+
 #
-# TODO: Check existance of INFILE
 # TODO: Call postgresql_index_advice.sh with single SQL statement on commandline
 #
 # CURRENTLY: This expects a blank line at the end of the file
@@ -35,6 +41,7 @@ INFILE=$1
 LINE=""
 SQLSTMT=""
 
+# Function to process a single line of input from file
 process_line () {
     if [ -n "${LINE}" ]; then
         SQLSTMT+="${LINE} "
@@ -45,8 +52,11 @@ process_line () {
     fi
 
 }
+
+# Main loop
 while read -r LINE
 do
     process_line
 done < "$INFILE"
+# Handle last line (if any)
 process_line
