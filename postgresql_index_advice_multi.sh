@@ -5,15 +5,33 @@
 #
 
 #
-# TODO: Show usage by default or with --help
+# TODO: Show usage by default or with --help or lack of argument
 #
+print_usage () {
+    echo "USAGE: $0 <filename with multiple SQL statements>"
+    echo
+}
+
+if [ "$#" -ne 1 ]; then
+    print_usage
+    exit 1
+fi
+
+if [ "$1" == "--help" ]; then
+    print_usage
+    exit 0
+fi
+
+# Input file is the first argument
+INFILE=$1
 
 #
-# TODO: Print different SQL statements (even if they are multi line)
+# TODO: Check existance of INFILE
+# TODO: Call postgresql_index_advice.sh with single SQL statement on commandline
 #
 # CURRENTLY: This expects a blank line at the end of the file
 
-INFILE="testinput.sql"
+#INFILE="testinput.sql"
 LINE=""
 SQLSTMT=""
 
