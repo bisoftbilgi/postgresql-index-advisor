@@ -12,8 +12,12 @@ do
           index_create_script=`echo "${kolonlar/ /,})"`
           index_create_script=${index_create_script/,)/)}
           index_create_script=`echo  "create index ix_sample_$(date '+%Y%m%d%H%M%S') on ${tablo} ( ${index_create_script}"`
-          echo "table:${tablo} adviced_index_columns:${kolonlar} index_create_script : ${index_create_script}  psql_bash_command: psql -p$1 -d $2 -c \"${index_create_script}\" "
+   #       echo "table:${tablo} \n adviced_index_columns:${kolonlar} index_create_script : ${index_create_script}  psql_bash_command: psql -p$1 -d $2 -c \"${index_create_script}\" "
+        printf "************ADVICE*********************\ntable => ${tablo} \nadviced_index_columns => ${kolonlar} \nindex_create_script => ${index_create_script} \npsql_bash_command => psql -p$1 -d $2 -c \"${index_create_script}\"  \n***************ADVICE*****************"
       fi
  fi
     prev="${line}"
 done
+
+echo
+
