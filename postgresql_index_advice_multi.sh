@@ -50,7 +50,7 @@ PIA="./postgresql_index_advice.sh"
 process_line () {
     if [ -n "${LINE}" ]; then
         # Add the new line read to the SQL statement being built
-        SQLSTMT+=" ${LINE} "
+        SQLSTMT+="${LINE} "
     fi
 
     # Check if we have end of SQL statement
