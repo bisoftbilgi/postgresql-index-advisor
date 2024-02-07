@@ -58,7 +58,7 @@ process_line () {
         echo
         echo "Processing \"$SQLSTMT\""
         # Execute postgresql_index_advice.sh
-        $PIA $PORT $DBNAME \""${SQLSTMT}"\"
+        $PIA $PORT $DBNAME \"${SQLSTMT}\"
         # Reset SQL statement as latest is concluded by ;
         SQLSTMT=""
     fi
