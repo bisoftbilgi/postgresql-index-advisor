@@ -1,5 +1,4 @@
 # PostgreSQL Index Advisor
-
 This is a set of bash scripts to be used to analyze a single or a set of SQL statements in connection with a PostgreSQL database that will generate suggestions for indexes to be added.
 
 ## postgresql_index_advice.sh
@@ -7,12 +6,12 @@ This is a set of bash scripts to be used to analyze a single or a set of SQL sta
 
 The script is to be run on PostgreSQL database server as `postgres` operating system user.
 
-Usage:
+### Usage:
 `$ postgresql_index_advice.sh <postgresql port number> <database name> <SQL statement>`
 
-Example:
+### Example:
 ```
-[postgres@node01 ~]$  sh postgresql_index_advice.sh 5432 dvdrental "select * from customers c,payments p where c.customer_id=p.customer_id and p.rental_id=10 and c.store_id=20; "
+[postgres@node01 ~]$ postgresql_index_advice.sh 5432 dvdrental "select * from customers c,payments p where c.customer_id=p.customer_id and p.rental_id=10 and c.store_id=20; "
 
 output : table | index_create_script | psql_bash_command
 ***************
@@ -22,14 +21,12 @@ table:payments adviced_index_columns:rental_id  index_create_script : create ind
 ## postgresql_index_advice_multi.sh
 Script to read a *.sql file with multiple (and multi-line) SQL statements and then to feed them to `postgresql_index_advice.sh`
 
-
-Usage:
+### Usage:
 `$ postgresql_index_advice_multi.sh <port> <database> <regular file with multiple SQL statements>`
 
-Example:
+### Example:
 ```
-[postgres@node01]$ /postgresql_index_advice_multi.sh  5432 dvdrental sql_statements.sql
-
+[postgres@node01 ~]$ postgresql_index_advice_multi.sh 5432 dvdrental sql_statements.sql
 
 Processing "select * from rent where inventory_id=10; "
 ************ADVICE*********************
